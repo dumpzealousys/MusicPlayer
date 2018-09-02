@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/comment_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FAEBD7"
+            app:title="歌曲评论"
+            app:titleTextColor="#000"
+            app:titleMarginStart="10sp"
+            android:layout_alignParentTop="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+
+            android:id="@+id/ll1"
+            >
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="酷我"
+
+                />
+
+            <Button
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
+                android:text="酷狗" />
+
+            <Button
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
+                android:text="网易云"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/xxx"
+                android:layout_height="0dp"
+                android:layout_weight="0"
+                android:text="test"
+                android:visibility="invisible"
+
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/yyy"
+                android:layout_height="0dp"
+                android:layout_weight="0"
+                android:text="test"
+                android:visibility="invisible"
+
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/zzz"
+                android:layout_height="0dp"
+                android:layout_weight="0"
+                android:text="test"
+                android:visibility="invisible"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_above="@id/ll1"
+            android:layout_below="@+id/tb1"
+            android:id="@+id/op1"
+            >
+            <fragment
+                android:id="@+id/left_fragment"
+                android:name="com.example.gaoch.music_players_8.controller.WangFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
