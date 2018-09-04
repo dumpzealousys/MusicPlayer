@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     ImageView record_play;  //播放记录
     Toolbar toolbar;   //标题栏
     MusicNotification musicNotification;
+    
+    private int OVERLAY_PERMISSION_REQ_CODE  =123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
