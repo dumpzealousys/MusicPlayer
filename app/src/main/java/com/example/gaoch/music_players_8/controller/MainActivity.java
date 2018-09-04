@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        musicView();
         musicNotification=new MusicNotification(MainActivity.this);
         musicNotification.Initnotify();
         //启动服务
@@ -248,6 +249,195 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 break;
             default:
                 break;
+        }
+    }
+    
+    
+    private void musicView()
+    {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, OVERLAY_PERMISSION_REQ_CODE);
+    }
+    else
+        {
+            AudioWidget audioWidget = new AudioWidget.Builder(this).build();
+            audioWidget.show(100,100);
+
+            audioWidget.controller().onControlsClickListener(new AudioWidget.OnControlsClickListener() {
+                @Override
+                public boolean onPlaylistClicked() {
+
+                        return false;
+                }
+
+                @Override
+                public void onPlaylistLongClicked() {
+
+                }
+
+                @Override
+                public void onPreviousClicked() {
+                    play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                    isplay=true;
+                    setPrevious_music();
+
+                }
+
+                @Override
+                public void onPreviousLongClicked() {
+
+                }
+
+                @Override
+                public boolean onPlayPauseClicked() {
+
+
+                    isplay=!isplay;
+                    if(isplay==true) {
+                        play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                        if (recent_one_record.equals(strpath)) {
+                            strpath = "";
+                            Intent intent = new Intent();
+                            intent.setAction("LAST_PLAY");
+                            intent.putExtra("lastplay", recent_one_record);
+                            sendBroadcast(intent);
+                        }
+
+                    }else{
+                        play_music.setBackgroundResource(R.mipmap.ic_play_music);
+                    }
+                    Intent intent2=new Intent();
+                    intent2.setAction("ACTION_ISPLAY");
+                    intent2.putExtra("isplay",isplay);
+                    sendBroadcast(intent2);
+
+                    return false;
+                }
+
+                @Override
+                public void onPlayPauseLongClicked() {
+
+                }
+
+                @Override
+                public void onNextClicked() {
+                    play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                    isplay=true;
+                    setNext_music();
+
+                }
+
+                @Override
+                public void onNextLongClicked() {
+
+                }
+
+                @Override
+                public void onAlbumClicked() {
+
+                }
+
+                @Override
+                public void onAlbumLongClicked() {
+
+                }
+            });
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Settings.canDrawOverlays(this)) {
+                // now you can show audio widget
+
+                AudioWidget audioWidget = new AudioWidget.Builder(this).build();
+                audioWidget.show(100,100);
+                audioWidget.controller().onControlsClickListener(new AudioWidget.OnControlsClickListener() {
+                    @Override
+                    public boolean onPlaylistClicked() {
+
+                        return false;
+                    }
+
+                    @Override
+                    public void onPlaylistLongClicked() {
+
+                    }
+
+                    @Override
+                    public void onPreviousClicked() {
+                        play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                        isplay=true;
+                        setPrevious_music();
+
+                    }
+
+                    @Override
+                    public void onPreviousLongClicked() {
+
+                    }
+
+                    @Override
+                    public boolean onPlayPauseClicked() {
+
+                        isplay=!isplay;
+                        if(isplay==true) {
+                            play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                            if (recent_one_record.equals(strpath)) {
+                                strpath = "";
+                                Intent intent = new Intent();
+                                intent.setAction("LAST_PLAY");
+                                intent.putExtra("lastplay", recent_one_record);
+                                sendBroadcast(intent);
+                            }
+
+                        }else{
+                            play_music.setBackgroundResource(R.mipmap.ic_play_music);
+                        }
+                        Intent intent2=new Intent();
+                        intent2.setAction("ACTION_ISPLAY");
+                        intent2.putExtra("isplay",isplay);
+                        sendBroadcast(intent2);
+
+                        return false;
+                    }
+
+                    @Override
+                    public void onPlayPauseLongClicked() {
+
+                    }
+
+                    @Override
+                    public void onNextClicked() {
+
+                        play_music.setBackgroundResource(R.mipmap.ic_pause_play);
+                        isplay=true;
+                        setNext_music();
+
+                    }
+
+                    @Override
+                    public void onNextLongClicked() {
+
+                    }
+
+                    @Override
+                    public void onAlbumClicked() {
+
+                    }
+
+                    @Override
+                    public void onAlbumLongClicked() {
+
+                    }
+                });
+            }
         }
     }
 
